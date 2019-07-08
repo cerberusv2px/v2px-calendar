@@ -1,10 +1,19 @@
 package com.rosia.calendartest
 
+import com.rosia.calendartest.models.CustomDay
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun getListOfDays(): List<String> {
-	return listOf("S", "M", "T", "W", "T", "F", "S")
+fun getListOfDays(): List<CustomDay> {
+	return listOf(
+		CustomDay("Sun", "S"),
+		CustomDay("Mon", "M"),
+		CustomDay("Tue", "T"),
+		CustomDay("Wed", "W"),
+		CustomDay("Thu", "T"),
+		CustomDay("Fri", "F"),
+		CustomDay("Sat", "S")
+	)
 }
 
 fun getCurrentDate(): String {
@@ -14,8 +23,11 @@ fun getCurrentDate(): String {
 	return simpleDateFormat.format(cal.time)
 }
 
-
-fun formatDate(inputDate: String, inputFormat: String = "yyyy-MM-dd", outputFormat: String): String {
+fun formatDate(
+	inputDate: String,
+	inputFormat: String = "yyyy-MM-dd",
+	outputFormat: String
+): String {
 	val outputDateFormat = SimpleDateFormat(outputFormat, Locale.getDefault())
 	val inputDateFormat = SimpleDateFormat(inputFormat, Locale.getDefault())
 	val date = inputDateFormat.parse(inputDate)

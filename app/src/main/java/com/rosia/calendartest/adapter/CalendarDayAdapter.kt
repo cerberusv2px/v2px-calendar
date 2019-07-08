@@ -5,10 +5,11 @@ import com.rosia.calendartest.R
 import com.rosia.calendartest.base.BaseAdapter
 import com.rosia.calendartest.base.BaseViewHolder
 import com.rosia.calendartest.databinding.ItemDayBinding
+import com.rosia.calendartest.models.CustomDay
 
 class CalendarDayAdapter(
-	private val data: List<String>
-) : BaseAdapter<String, CalendarDayAdapter.CalendarDayViewHolder, ItemDayBinding>() {
+	private val data: List<CustomDay>
+) : BaseAdapter<CustomDay, CalendarDayAdapter.CalendarDayViewHolder, ItemDayBinding>() {
 
 	override fun getItemCount(): Int = data.size
 
@@ -26,8 +27,8 @@ class CalendarDayAdapter(
 
 		override fun bind(item: Any) {
 			super.bind(item)
-			val day = item as String
-			(viewBinding as ItemDayBinding).textDate.text = day
+			val customDay = item as CustomDay
+			(viewBinding as ItemDayBinding).textDate.text = customDay.dayInitial
 		}
 	}
 }
