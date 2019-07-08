@@ -38,7 +38,18 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun setupDateAdapter() {
-		calendarDateAdapter = CalendarDateAdapter(getAllDateInMonth())
+		val dateMonthList = getAllDateInMonth() as MutableList
+		val eventList = getEventData()
+		for (customCalendar in dateMonthList) {
+			val eventDate = eventList.find { it.date == customCalendar.date }
+			if (eventDate != null) {
+				customCalendar.startDate = eventDate.startDate
+				customCalendar.endDate = eventDate.endDate
+				customCalendar.hasEvents = eventDate.hasEvents
+				customCalendar.status = eventDate.status
+			}
+		}
+		calendarDateAdapter = CalendarDateAdapter(dateMonthList)
 		binding.recyclerDate.adapter = calendarDateAdapter
 	}
 
@@ -95,5 +106,42 @@ class MainActivity : AppCompatActivity() {
 		}
 		setUpNewMonth()
 		setupDateAdapter()
+	}
+
+	private fun getEventData(): List<CustomCalendar> {
+		return listOf(
+			CustomCalendar(
+				"17",
+				"Wed",
+				true,
+				"2019-07-17",
+				null,
+				CalendarDateAdapter.STATUS_ACCEPTED
+			),
+			CustomCalendar(
+				"18",
+				"Thu",
+				true,
+				"2019-07-18",
+				null,
+				CalendarDateAdapter.STATUS_REJECTED
+			),
+			CustomCalendar(
+				"21",
+				"Sun",
+				true,
+				"2019-07-21",
+				"2019-07-22",
+				CalendarDateAdapter.STATUS_ACCEPTED
+			),
+			CustomCalendar(
+				"24",
+				"Wed",
+				true,
+				"2019-07-24",
+				"2019-07-26",
+				CalendarDateAdapter.STATUS_PENDING
+			)
+		)
 	}
 }

@@ -23,7 +23,8 @@ class CalendarDayAdapter(
 		holder.bind(item)
 	}
 
-	inner class CalendarDayViewHolder(private val viewBinding: ViewDataBinding) : BaseViewHolder(viewBinding) {
+	inner class CalendarDayViewHolder(private val viewBinding: ViewDataBinding) :
+		BaseViewHolder(viewBinding) {
 
 		override fun bind(item: Any) {
 			super.bind(item)
