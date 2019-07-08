@@ -45,3 +45,25 @@ fun getCurrentDate(cal: Calendar): String {
 	val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 	return simpleDateFormat.format(cal.time)
 }
+
+fun getBetweenDates(startDate: String, endDate: String): List<String> {
+	val df = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+	val startCalendar = Calendar.getInstance()
+	startCalendar.time = df.parse(startDate)
+
+	val endCalendar = Calendar.getInstance()
+	endCalendar.time = df.parse(endDate)
+
+	val betweenDates = mutableListOf<String>()
+	while (startCalendar.before(endCalendar)) {
+		val result = startCalendar.time
+		startCalendar.add(Calendar.DATE, 1)
+		betweenDates.add(df.format(result))
+	}
+	betweenDates.add(endDate)
+
+	//betweenDates.removeAt(0)
+	//	betweenDates.removeAt(betweenDates.size - 1)
+	// println(betweenDates)
+	return betweenDates
+}

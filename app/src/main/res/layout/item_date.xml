@@ -9,17 +9,18 @@
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:id="@+id/item_container"
-		android:layout_width="30dp"
+		android:layout_width="match_parent"
 		android:layout_height="30dp"
-		android:layout_marginStart="16dp"
 		android:layout_marginTop="2dp"
 		android:layout_marginBottom="2dp">
+
 
 		<TextView
 			android:id="@+id/text_date"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:fontFamily="@font/rubik"
+			android:gravity="center"
 			android:textAllCaps="false"
 			android:textSize="12sp"
 			app:layout_constraintBottom_toBottomOf="parent"
@@ -28,5 +29,8 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
 			tools:text="13" />
+
 	</androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>

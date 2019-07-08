@@ -38,25 +38,44 @@ class CalendarDateAdapter(
 			val customCalendar = item as CustomCalendar
 			(binding as ItemDateBinding).textDate.text = customCalendar.date
 			when (customCalendar.status) {
-				STATUS_ACCEPTED -> handleAcceptedState(binding)
-				STATUS_REJECTED -> handleRejectedState(binding)
-				STATUS_PENDING -> handlePendingState(binding)
+				STATUS_ACCEPTED -> handleAcceptedState(binding, customCalendar)
+				STATUS_REJECTED -> handleRejectedState(binding, customCalendar)
+				STATUS_PENDING -> handlePendingState(binding, customCalendar)
 
 			}
 		}
 
-		private fun handleAcceptedState(binding: ItemDateBinding) {
-			binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green))
+		private fun handleAcceptedState(binding: ItemDateBinding, customCalendar: CustomCalendar) {
+			when {
+
+				customCalendar.isMiddleDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rec_green))
+				customCalendar.isStartDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_start_green))
+				customCalendar.isEndDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_end_green))
+				customCalendar.endDate == customCalendar.startDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green))
+			}
+
 			binding.textDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white_FFFFFF))
 		}
 
-		private fun handleRejectedState(binding: ItemDateBinding) {
-			binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_red))
+		private fun handleRejectedState(binding: ItemDateBinding, customCalendar: CustomCalendar) {
+			when {
+				customCalendar.isMiddleDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rec_red))
+				customCalendar.isStartDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_start_red))
+				customCalendar.isEndDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_end_red))
+				customCalendar.endDate == customCalendar.startDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_red))
+			}
+
 			binding.textDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white_FFFFFF))
 		}
 
-		private fun handlePendingState(binding: ItemDateBinding) {
-			binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_grey))
+		private fun handlePendingState(binding: ItemDateBinding, customCalendar: CustomCalendar) {
+			when {
+				customCalendar.isMiddleDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rec_grey))
+				customCalendar.isStartDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_start_grey))
+				customCalendar.isEndDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_end_grey))
+				customCalendar.endDate == customCalendar.startDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_grey))
+			}
+
 			binding.textDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black_2e384d))
 		}
 	}
