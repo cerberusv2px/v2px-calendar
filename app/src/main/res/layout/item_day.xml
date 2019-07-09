@@ -8,10 +8,10 @@
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:padding="8dp"
-		android:layout_marginStart="16dp">
+		android:layout_width="match_parent"
+		android:layout_height="30dp"
+		android:layout_marginTop="2dp"
+		android:layout_marginBottom="2dp">
 
 		<TextView
 			android:id="@+id/text_date"
@@ -20,6 +20,7 @@
 			android:fontFamily="@font/rubik"
 			android:textColor="@color/black_2e384d"
 			android:textSize="12sp"
+			android:gravity="center"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"

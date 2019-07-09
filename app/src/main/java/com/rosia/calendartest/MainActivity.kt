@@ -29,6 +29,15 @@ class MainActivity : AppCompatActivity() {
 			btnPrevious.setOnClickListener { handlePreviousMonthButtonClicked() }
 			btnNext.setOnClickListener { handleNextMonthButtonClicked() }
 		}
+
+		val gridLayoutManager = GridLayoutManager(this@MainActivity, 7)
+		val customItemDecoration = CalendarItemDecoration(this@MainActivity)
+
+		binding.recyclerDate.apply {
+			layoutManager = gridLayoutManager
+			addItemDecoration(customItemDecoration)
+		}
+
 		setupDayAdapter()
 		setupDateAdapter()
 		setUpMonth()
@@ -171,13 +180,8 @@ class MainActivity : AppCompatActivity() {
 		}
 
 		calendarDateAdapter = CalendarDateAdapter(dateMonthList)
-		val itemDecoration1 = CalendarItemDecoration(this@MainActivity)
-
-		val layoutManager1 = GridLayoutManager(this@MainActivity, 7)
 
 		binding.recyclerDate.apply {
-			addItemDecoration(itemDecoration1)
-			layoutManager = layoutManager1
 			adapter = calendarDateAdapter
 		}
 	}

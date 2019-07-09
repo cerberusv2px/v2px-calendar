@@ -9,7 +9,7 @@ import com.rosia.calendartest.databinding.ItemDateBinding
 import com.rosia.calendartest.models.CustomCalendar
 
 class CalendarDateAdapter(
-	private val data: List<CustomCalendar>
+	val data: List<CustomCalendar>
 ) : BaseAdapter<CustomCalendar, CalendarDateAdapter.CalendarDateViewHolder, ItemDateBinding>() {
 
 	companion object {
@@ -51,7 +51,7 @@ class CalendarDateAdapter(
 				customCalendar.isMiddleDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rec_green))
 				customCalendar.isStartDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_start_green))
 				customCalendar.isEndDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_end_green))
-				customCalendar.endDate == customCalendar.startDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green))
+				customCalendar.endDate == customCalendar.startDate -> binding.textDate.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green))
 			}
 
 			binding.textDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white_FFFFFF))
@@ -62,7 +62,7 @@ class CalendarDateAdapter(
 				customCalendar.isMiddleDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rec_red))
 				customCalendar.isStartDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_start_red))
 				customCalendar.isEndDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_end_red))
-				customCalendar.endDate == customCalendar.startDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_red))
+				customCalendar.endDate == customCalendar.startDate -> binding.textDate.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_red))
 			}
 
 			binding.textDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white_FFFFFF))
@@ -73,7 +73,7 @@ class CalendarDateAdapter(
 				customCalendar.isMiddleDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rec_grey))
 				customCalendar.isStartDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_start_grey))
 				customCalendar.isEndDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_rounded_end_grey))
-				customCalendar.endDate == customCalendar.startDate -> binding.itemContainer.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_grey))
+				customCalendar.endDate == customCalendar.startDate -> binding.textDate.background = (ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_grey))
 			}
 
 			binding.textDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black_2e384d))
