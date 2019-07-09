@@ -1,6 +1,7 @@
-package com.rosia.calendartest
+package com.rosia.v2pxcalendar.ui.utils
 
-import com.rosia.calendartest.models.CustomDay
+import com.rosia.v2pxcalendar.ui.models.CustomCalendar
+import com.rosia.v2pxcalendar.ui.models.CustomDay
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -67,3 +68,4 @@ fun getBetweenDates(startDate: String, endDate: String): List<String> {
 	// println(betweenDates)
 	return betweenDates
 }
+

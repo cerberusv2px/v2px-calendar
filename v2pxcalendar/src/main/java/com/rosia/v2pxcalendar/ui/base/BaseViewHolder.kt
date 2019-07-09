@@ -1,4 +1,4 @@
-package com.rosia.calendartest.base
+package com.rosia.v2pxcalendar.ui.base
 
 import androidx.databinding.ViewDataBinding
 
