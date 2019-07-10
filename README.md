@@ -24,4 +24,40 @@ Use this in your class file for setting events
 
 ```
 calendarView.setEvents(getEventDate()).show()
+
+
+private fun getEventDate(): List<EventModel> {
+		return listOf(
+			EventModel(
+				"2019-07-01",
+				"2019-07-01",
+				CalendarDateAdapter.STATUS_ACCEPTED
+			),
+			EventModel(
+				"2019-07-02",
+				"2019-07-02",
+				CalendarDateAdapter.STATUS_REJECTED
+			),
+			EventModel(
+				"2019-07-03",
+				"2019-07-04",
+				CalendarDateAdapter.STATUS_ACCEPTED
+			),
+			EventModel(
+				"2019-07-08",
+				"2019-07-13",
+				CalendarDateAdapter.STATUS_PENDING
+			)
+		)
+	}
+```
+
+Create a `EventModel` with something like this:
+```
+data class EventModel(
+	val startDate: String,
+	val endDate: String? = null,
+	val status: String
+)
+
 ```
