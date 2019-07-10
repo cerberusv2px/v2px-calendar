@@ -1,7 +1,6 @@
-package com.rosia.v2pxcalendar.ui.utils
+package com.rosia.v2pxcalendar.utils
 
-import com.rosia.v2pxcalendar.ui.models.CustomCalendar
-import com.rosia.v2pxcalendar.ui.models.CustomDay
+import com.rosia.v2pxcalendar.models.CustomDay
 import java.text.SimpleDateFormat
 import java.util.*
 

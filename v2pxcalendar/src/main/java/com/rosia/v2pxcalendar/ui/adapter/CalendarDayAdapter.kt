@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rosia.v2pxcalendar.R
-import com.rosia.v2pxcalendar.ui.models.CustomDay
+import com.rosia.v2pxcalendar.models.CustomDay
 import kotlinx.android.synthetic.main.item_day.view.*
 
 class CalendarDayAdapter(

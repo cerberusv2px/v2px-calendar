@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rosia.v2pxcalendar.R
-import com.rosia.v2pxcalendar.ui.models.CustomCalendar
+import com.rosia.v2pxcalendar.models.CustomCalendar
 import kotlinx.android.synthetic.main.item_date.view.*
 
 class CalendarDateAdapter(val data: List<CustomCalendar>) :

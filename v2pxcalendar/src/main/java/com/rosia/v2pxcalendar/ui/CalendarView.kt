@@ -1,20 +1,22 @@
 package com.rosia.v2pxcalendar.ui
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rosia.v2pxcalendar.R
+import com.rosia.v2pxcalendar.models.CustomCalendar
+import com.rosia.v2pxcalendar.models.EventModel
+import com.rosia.v2pxcalendar.properties.CalendarProperties
 import com.rosia.v2pxcalendar.ui.adapter.CalendarDateAdapter
 import com.rosia.v2pxcalendar.ui.adapter.CalendarDayAdapter
 import com.rosia.v2pxcalendar.ui.adapter.CalendarItemDecoration
-import com.rosia.v2pxcalendar.ui.models.CustomCalendar
-import com.rosia.v2pxcalendar.ui.models.EventModel
-import com.rosia.v2pxcalendar.ui.utils.formatDate
-import com.rosia.v2pxcalendar.ui.utils.getBetweenDates
-import com.rosia.v2pxcalendar.ui.utils.getCurrentDate
-import com.rosia.v2pxcalendar.ui.utils.getListOfDays
+import com.rosia.v2pxcalendar.utils.formatDate
+import com.rosia.v2pxcalendar.utils.getBetweenDates
+import com.rosia.v2pxcalendar.utils.getCurrentDate
+import com.rosia.v2pxcalendar.utils.getListOfDays
 import kotlinx.android.synthetic.main.view_calendar.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,12 +25,15 @@ class CalendarView : ConstraintLayout {
 
 	private lateinit var calendarDateAdapter: CalendarDateAdapter
 	private lateinit var calendar: Calendar
+	private lateinit var calendarProps: CalendarProperties
+	private var eventsDates = listOf<EventModel>()
 
 	companion object {
 		private const val MONTH_YEAR_FORMAT = "MMMM yyyy"
 	}
 
-	constructor(context: Context) : super(context) {
+	constructor(context: Context, calendarProperties: CalendarProperties) : super(context) {
+		this.calendarProps = calendarProperties
 		initView()
 	}
 
@@ -36,32 +41,17 @@ class CalendarView : ConstraintLayout {
 		initView()
 	}
 
-	private fun initView() {
-		val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-		inflater.inflate(R.layout.view_calendar, this)
-		/*binding = DataBindingUtil.inflate(
-			LayoutInflater.from(context),
-			R.layout.view_calendar,
-			this,
-			true
-		)*/
-
-		calendar = Calendar.getInstance()
-
-		btn_previous.setOnClickListener { handlePreviousMonthButtonClicked() }
-		btn_next.setOnClickListener { handleNextMonthButtonClicked() }
-
-		val gridLayoutManager = GridLayoutManager(context, 7)
-		val customItemDecoration = CalendarItemDecoration(context)
-
-		recycler_date.apply {
-			layoutManager = gridLayoutManager
-			addItemDecoration(customItemDecoration)
+	private fun setAttributes(context: Context, attrs: AttributeSet) {
+		val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CalendarView)
+		try {
+			initCalProps(typedArray)
+		} finally {
+			typedArray.recycle()
 		}
+	}
 
-		setupDayAdapter()
-		setupDateAdapter()
-		setUpMonth()
+	private fun initCalProps(typedArray: TypedArray) {
+		val headerColor = typedArray.getColor(R.styleable.CalendarView_headerColor, 0)
 	}
 
 	private fun setupDayAdapter() {
@@ -71,7 +61,7 @@ class CalendarView : ConstraintLayout {
 
 	private fun setupDateAdapter() {
 		val dateMonthList = getAllDateInMonth() as MutableList
-		val eventList = getEventData()
+		val eventList = this.eventsDates
 		for (customCalendar in dateMonthList) {
 			val eventDate = eventList.find { it.startDate == customCalendar.fullDate }
 			if (eventDate != null) {
@@ -147,6 +137,8 @@ class CalendarView : ConstraintLayout {
 		recycler_date.apply {
 			adapter = calendarDateAdapter
 		}
+
+		calendarDateAdapter.notifyDataSetChanged()
 	}
 
 	private fun setUpMonth() {
@@ -158,7 +150,6 @@ class CalendarView : ConstraintLayout {
 			formatDate(getCurrentDate(calendar), outputFormat = MONTH_YEAR_FORMAT)
 	}
 
-	// TODO: check new/previous year
 	private fun handlePreviousMonthButtonClicked() {
 		val currentMonthIndex = calendar.get(Calendar.MONTH)
 		calendar.apply {
@@ -209,28 +200,35 @@ class CalendarView : ConstraintLayout {
 		return dateList
 	}
 
-	private fun getEventData(): List<EventModel> {
-		return listOf(
-			EventModel(
-				"2019-07-01",
-				"2019-07-01",
-				CalendarDateAdapter.STATUS_ACCEPTED
-			),
-			EventModel(
-				"2019-07-02",
-				"2019-07-02",
-				CalendarDateAdapter.STATUS_REJECTED
-			),
-			EventModel(
-				"2019-07-03",
-				"2019-07-04",
-				CalendarDateAdapter.STATUS_ACCEPTED
-			),
-			EventModel(
-				"2019-07-05",
-				"2019-07-08",
-				CalendarDateAdapter.STATUS_PENDING
-			)
-		)
+	private fun initView() {
+		val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+		inflater.inflate(R.layout.view_calendar, this)
+
+		calendar = Calendar.getInstance()
+
+		btn_previous.setOnClickListener { handlePreviousMonthButtonClicked() }
+		btn_next.setOnClickListener { handleNextMonthButtonClicked() }
+
+		val gridLayoutManager = GridLayoutManager(context, 7)
+		val customItemDecoration = CalendarItemDecoration(context)
+
+		recycler_date.apply {
+			layoutManager = gridLayoutManager
+			addItemDecoration(customItemDecoration)
+		}
+
+		setupDayAdapter()
+
+		setUpMonth()
+	}
+
+	fun setEvents(eventList: List<EventModel>): CalendarView {
+		this.eventsDates = eventList
+		return this
+	}
+
+	fun show(): CalendarView {
+		setupDateAdapter()
+		return this
 	}
 }
