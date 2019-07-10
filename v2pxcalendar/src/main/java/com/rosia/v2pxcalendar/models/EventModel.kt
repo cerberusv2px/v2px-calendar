@@ -1,4 +1,4 @@
-package com.rosia.calendartest.models
+package com.rosia.v2pxcalendar.models
 
 data class EventModel(
 	val startDate: String,
