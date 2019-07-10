@@ -61,3 +61,7 @@ data class EventModel(
 )
 
 ```
+
+### Sample
+![Sample image](https://github.com/cerberusv2px/v2px-calendar/blob/master/sample1.png)
+
