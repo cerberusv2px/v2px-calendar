@@ -52,7 +52,7 @@ private fun getEventDate(): List<EventModel> {
 	}
 ```
 
-Create a `EventModel` with something like this:
+`EventModel` looks something like this:
 ```
 data class EventModel(
 	val startDate: String,
